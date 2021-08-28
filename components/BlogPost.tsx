@@ -1,3 +1,3 @@
 export const BlogPost = ({ children, frontmatter }) => {
-  return <article className="prose xl:prose-xl">{children}</article>
+  return <div className="mx-auto my-10 prose">{children}</div>
 }

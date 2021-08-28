@@ -3,6 +3,8 @@ import path from "path"
 import matter from "gray-matter"
 import { bundleMDX } from "mdx-bundler"
 
+import remarkGfm from "remark-gfm"
+
 export const ROOT = process.cwd()
 export const POSTS_PATH = path.join(process.cwd(), "posts")
 
@@ -11,7 +13,7 @@ export const getFileContent = (filename: string) => {
 }
 
 const getCompiledMDX = async (content: string) => {
-  const remarkPlugins: never[] = []
+  const remarkPlugins = [remarkGfm]
   const rehypePlugins: never[] = []
 
   try {

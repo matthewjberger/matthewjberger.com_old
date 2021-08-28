@@ -1,6 +1,6 @@
 import type { NextPage } from "next"
 import React from "react"
-import { Container } from "../components/Container"
+import { Container } from "@/components/Container"
 
 const Home: NextPage = () => {
   return (

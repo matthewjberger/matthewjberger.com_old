@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import Head from "next/head"
-import { NavBar } from "./NavBar"
-import { Footer } from "./Footer"
+import { NavBar } from "@/components/NavBar"
+import { Footer } from "@/components/Footer"
 
 export const Container = ({ children }) => {
   return (

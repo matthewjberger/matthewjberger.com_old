@@ -1,6 +1,6 @@
 import React from "react"
 import NextLink from "next/link"
-import { ThemeSwitcher } from "./ThemeChanger"
+import { ThemeSwitcher } from "@/components/ThemeChanger"
 
 export const NavBar = () => {
   return (

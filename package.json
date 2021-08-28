@@ -12,6 +12,7 @@
     "eslint-fix": "eslint --fix"
   },
   "dependencies": {
+    "@tailwindcss/typography": "^0.4.1",
     "esbuild": "^0.12.24",
     "gray-matter": "^4.0.3",
     "mdx-bundler": "^6.0.1",

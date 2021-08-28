@@ -2,9 +2,12 @@ import fs from "fs"
 import path from "path"
 import matter from "gray-matter"
 import { bundleMDX } from "mdx-bundler"
+import readingTime from "reading-time"
 
 import remarkGfm from "remark-gfm"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
+import rehypeCodeTitles from "rehype-code-titles"
+import rehypePrism from "rehype-prism-plus"
 import rehypeSanitize from "rehype-sanitize"
 import rehypeSlug from "rehype-slug"
 
@@ -17,7 +20,12 @@ export const getFileContent = (filename: string) => {
 
 const getCompiledMDX = async (content: string) => {
   const remarkPlugins = [remarkGfm]
-  const rehypePlugins = [rehypeAutolinkHeadings, rehypeSanitize, rehypeSlug]
+  const rehypePlugins = [
+    rehypeCodeTitles,
+    rehypePrism,
+    rehypeSanitize,
+    rehypeSlug,
+  ]
 
   try {
     return await bundleMDX(content, {
@@ -29,6 +37,14 @@ const getCompiledMDX = async (content: string) => {
         options.rehypePlugins = [
           ...(options.rehypePlugins ?? []),
           ...rehypePlugins,
+          [
+            rehypeAutolinkHeadings,
+            {
+              properties: {
+                className: ["anchor"],
+              },
+            },
+          ],
         ]
 
         return options
@@ -44,7 +60,12 @@ export const getSinglePost = async (slug: string) => {
   const { code, frontmatter } = await getCompiledMDX(source)
 
   return {
-    frontmatter,
+    frontmatter: {
+      wordCount: source.split(/\s+/gu).length,
+      readingTime: readingTime(source),
+      slug: slug || null,
+      ...frontmatter,
+    },
     code,
   }
 }

@@ -1,3 +1,10 @@
+import React from "react"
+import { Container } from "./Container"
+
 export const BlogPost = ({ children, frontmatter }) => {
-  return <div className="mx-auto my-10 prose">{children}</div>
+  return (
+    <Container>
+      <div className="mx-auto my-10 prose">{children}</div>
+    </Container>
+  )
 }

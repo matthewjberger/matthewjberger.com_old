@@ -4,7 +4,13 @@ import { getMDXComponent } from "mdx-bundler/client"
 import { getAllPosts, getSinglePost } from "@/lib/mdx"
 import { BlogPost } from "@/components/BlogPost"
 
-const Post = ({ code, frontmatter }) => {
+interface PostProps {
+  code: string
+  frontmatter: { [key: string]: any }
+}
+
+const Post = (props: PostProps) => {
+  const { code, frontmatter } = props
   const Component = React.useMemo(() => getMDXComponent(code), [code])
   return (
     <BlogPost frontmatter={frontmatter}>
@@ -13,7 +19,14 @@ const Post = ({ code, frontmatter }) => {
   )
 }
 
-export const getStaticProps = async ({ params }) => {
+interface UrlProps {
+  params: {
+    slug: string
+  }
+}
+
+export const getStaticProps = async (props: UrlProps) => {
+  const { params } = props
   const post = await getSinglePost(params.slug)
   return {
     props: { ...post },

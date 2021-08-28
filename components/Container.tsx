@@ -3,7 +3,12 @@ import Head from "next/head"
 import { NavBar } from "@/components/NavBar"
 import { Footer } from "@/components/Footer"
 
-export const Container = ({ children }) => {
+interface ContainerProps {
+  children?: any
+}
+
+export const Container = (props: ContainerProps) => {
+  const { children } = props
   return (
     <div className="bg-white dark:bg-black">
       <Head>
